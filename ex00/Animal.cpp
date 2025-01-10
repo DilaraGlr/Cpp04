@@ -12,7 +12,7 @@ Animal::Animal(const std::string &name): type(name)
 
 Animal::Animal(const Animal &other) : type(other.type)
 {
-    std::cout << "Animal " << type << " has been created" << std::endl;
+    std::cout << "Animal " << type << " has been copied" << std::endl;
 }
 
 Animal::~Animal()
