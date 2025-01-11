@@ -1,21 +1,22 @@
 #include "Dog.hpp"
 
-Dog::Dog() : Animal("Dog"), Brain()
+Dog::Dog() : Animal("Dog")
 {
-    new Brain();
     std::cout << "Dog " << type << " has been created" << std::endl;
 }
 
-Dog::Dog(const Dog &other) : Animal(other)
+Dog::Dog(const Dog &other) : Animal(other), brain(new Brain(*other.brain))
 {
-    std::cout << "Dog " << type << " has been created" << std::endl;
+    std::cout << "Dog " << type << " has been copied" << std::endl;
 }
 
 Dog &Dog::operator=(const Dog &other)
 {
     if (this != &other)
     {
-        type = other.type;
+        Animal::operator=(other);
+        delete brain;
+        brain = new Brain(*other.brain);
     }
     std::cout << "Dog assignment operator called for " << type << std::endl;
     return *this;
@@ -32,3 +33,7 @@ void Dog::makeSound() const
     std::cout << "Woof Woof" << std::endl;
 }
 
+Brain *Dog::getBrain() const
+{
+    return brain;
+}

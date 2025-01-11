@@ -1,4 +1,5 @@
 #include "Brain.hpp"
+#include <iostream>
 
 Brain::Brain()
 {
@@ -7,11 +8,8 @@ Brain::Brain()
 
 Brain::Brain(const Brain &other)
 {
-    for (int i = 0; i < 100; i++)
-    {
-        ideas[i] = other.ideas[i];
-    }
-    std::cout << "Brain has been copied" << std::endl;
+    *this = other;
+    std::cout << "Brain has been created (copy constructor)" << std::endl;
 }
 
 Brain::~Brain()
@@ -24,9 +22,7 @@ Brain &Brain::operator=(const Brain &other)
     if (this != &other)
     {
         for (int i = 0; i < 100; i++)
-        {
             ideas[i] = other.ideas[i];
-        }
     }
     std::cout << "Brain assignment operator called" << std::endl;
     return *this;
