@@ -1,52 +1,53 @@
 #--------------------Colors---------------------
 
-GREEN 			= \033[0;32m
-RED 			= \033[0;31m
-YELLOW 			= \033[0;33m
-CYAN 			= \033[1;36m
-MAGENTA 		= \033[0;35m
-ORANGE 			= \033[38;5;216m
-NC 				= \033[0m
+PINK            = \033[0;35m
+LIGHT_PINK      = \033[0;38;5;213m
+LIGHT_PURPLE    = \033[0;35m
+SOFT_CYAN       = \033[0;96m
+WHITE           = \033[1;37m
+NC              = \033[0m
+LIGHT_LAVENDER  = \033[0;150m  # Lavande pâle
+MAUVE           = \033[38;5;105m
 
 #--------------------Program--------------------
 
-NAME 			= Brain
+NAME            = Brain
 
 #--------------------Compilation----------------
 
-CC				= c++
-CFLAGS 			= -Wall -Wextra -Werror -std=c++98
-RM				= rm -rf
+CC              = c++
+CFLAGS          = -Wall -Wextra -Werror -std=c++98
+RM              = rm -rf
 
 #--------------------PATHS----------------------
 
-OBJ_PATH		= objects
+OBJ_PATH        = objects
 
 #--------------------Sources--------------------
 
-HEADERS			= $(addsuffix .hpp, \
-					AMateria \
-					ICharacter \
-					Cure \
-					Ice \
-					IMateriaSource \
-					MateriaSource \
-					Character \
-					Materia \
-					)
+HEADERS         = $(addsuffix .hpp, \
+                    AMateria \
+                    ICharacter \
+                    Cure \
+                    Ice \
+                    IMateriaSource \
+                    MateriaSource \
+                    Character \
+                    Materia \
+                    )
 
-SRCS 			= $(addsuffix .cpp, \
-					main \
-					Cure \
-					Ice \
-					Materia \
-					Character \
-					MateriaSource \
-					)
+SRCS            = $(addsuffix .cpp, \
+                    main \
+                    Cure \
+                    Ice \
+                    Materia \
+                    Character \
+                    MateriaSource \
+                    )
 
-OBJS			=	$(SRCS:%.cpp=$(OBJ_PATH)/%.o)
+OBJS            = $(SRCS:%.cpp=$(OBJ_PATH)/%.o)
 
-DEPS			=	$(OBJS:.o=.d)
+DEPS            = $(OBJS:.o=.d)
 
 #--------------------RULES---------------------
 
@@ -54,8 +55,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(HEADERS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-	@echo "${MAGENTA}$@ ${GREEN}Compiled successfully${NC}"
-
+	@echo "${LIGHT_PINK}$@ ${MAUVE}Compiled successfully${NC}"
 
 $(OBJ_PATH)/%.o: %.cpp $(HEADERS)
 			@mkdir -p $(dir $@)
@@ -63,11 +63,11 @@ $(OBJ_PATH)/%.o: %.cpp $(HEADERS)
 
 clean:
 	@$(RM) $(OBJ_PATH)
-	@echo "${YELLOW}Finished cleaning${NC}"
+	@echo "${LIGHT_PURPLE}Finished cleaning${NC}"
 
 fclean: clean
 	@$(RM) $(NAME)
-	@echo "${YELLOW}Complete cleaning completed${NC}"
+	@echo "${LIGHT_PURPLE}Complete cleaning completed${NC}"
 
 re: fclean all
 

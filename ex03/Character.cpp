@@ -84,19 +84,17 @@ void Character::equip(AMateria* m)
 }
 
 // Déséquiper une Materia
-void Character::unequip(int idx)
+void Character::unequip(int idx) 
 {
     if (idx >= 0 && idx < 4)
-    {
         this->inventory[idx] = NULL;
-    }
 }
 
+
 // Utiliser une Materia
-void Character::use(int idx, ICharacter& target)
+void Character::use(int idx, ICharacter& target) 
 {
     if (idx >= 0 && idx < 4 && this->inventory[idx] != NULL)
-    {
         this->inventory[idx]->use(target);
-    }
 }
+

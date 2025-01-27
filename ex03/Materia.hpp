@@ -5,21 +5,21 @@
 
 class Materia : public AMateria
 {
-public:
-    // Constructeurs
-    Materia();
-    Materia(std::string const & type);
-    Materia(Materia const & src);
+    public:
+        // Constructeurs
+        Materia();
+        Materia(std::string const & type);
+        Materia(Materia const & src);
 
-    // Destructeur
-    virtual ~Materia();
+        // Destructeur
+        virtual ~Materia();
 
-    // Opérateur d'affectation
-    Materia & operator=(Materia const & src);
+        // Opérateur d'affectation
+        Materia & operator=(Materia const & src);
 
-    // Implémentation des méthodes pures d'AMateria
-    virtual AMateria* clone() const;
-    virtual void use(ICharacter& target);
+        // Implémentation des méthodes pures d'AMateria
+        virtual AMateria* clone() const;
+        virtual void use(ICharacter& target);
 };
 
 #endif // MATERIA_HPP
