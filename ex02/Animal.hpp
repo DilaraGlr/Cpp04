@@ -3,6 +3,8 @@
 
 #include <string>
 #include <iostream>
+#include "Brain.hpp"
+
 
 class Animal 
 {
@@ -18,6 +20,7 @@ class Animal
 
         virtual void makeSound() const = 0; // Virtual for polymorphism
         std::string getType() const;
+        virtual Brain *getBrain(void) const = 0;
 };
 
 #endif

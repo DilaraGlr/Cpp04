@@ -3,13 +3,12 @@
 
 #include "Animal.hpp"
 #include "Brain.hpp"
-#include <cstdio>
 
-class Cat : public Animal, public Brain
+class Cat : public Animal
 {
     private:
         Brain *brain;
-        
+
     public:
         Cat();
         Cat(const Cat &other);
@@ -17,7 +16,8 @@ class Cat : public Animal, public Brain
         ~Cat();
         
         virtual void makeSound() const;
-        Brain *getBrain() const;
+
+        Brain *getBrain(void) const;
 };
 
 #endif

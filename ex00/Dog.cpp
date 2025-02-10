@@ -10,15 +10,15 @@ Dog::Dog(const Dog &other) : Animal(other)
     std::cout << "Dog " << type << " has been created" << std::endl;
 }
 
-Dog &Dog::operator=(const Dog &other)
+Dog &Dog::operator=(Dog const &rhs)
 {
-    if (this != &other)
-    {
-        type = other.type;
-    }
-    std::cout << "Dog assignment operator called for " << type << std::endl;
-    return *this;
+	if (this == &rhs)
+		return (*this);
+	std::cout << "Dog assignation operator called" << std::endl;
+	this->type = rhs.getType();
+	return (*this);
 }
+
 
 Dog::~Dog()
 {

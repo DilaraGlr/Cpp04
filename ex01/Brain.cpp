@@ -17,23 +17,43 @@ Brain::~Brain()
     std::cout << "Brain has been destroyed" << std::endl;
 }
 
-Brain &Brain::operator=(const Brain &other)
+Brain &Brain::operator=(Brain const &rhs)
 {
-    if (this != &other)
-    {
-        for (int i = 0; i < 100; i++)
-            ideas[i] = other.ideas[i];
-    }
-    std::cout << "Brain assignment operator called" << std::endl;
-    return *this;
+	if (this == &rhs)
+		return (*this);
+	std::cout << "Brain assignation operator called" << std::endl;
+	*this->ideas = *rhs.ideas;
+	return (*this);
 }
 
-void Brain::setIdea(const std::string &idea, int index)
+const std::string *Brain::getIdeas(void)
 {
-    ideas[index] = idea;
+	return (this->ideas);
 }
 
-std::string Brain::getIdea(int index) const
+const std::string Brain::getIdea(int idx) const
 {
-    return ideas[index];
+	if (idx < 0 || idx > 99)
+	{
+		std::cout << "idx out of range" << std::endl;
+		return ("");
+	}
+	return (this->ideas[idx]);
+}
+
+void Brain::setIdeas(const std::string *ideas)
+{
+	for (int i = 0; i < 100; i++)
+	{
+		this->ideas[i] = ideas[i];
+	}
+}
+
+void Brain::setIdea(int index, std::string idea)
+{
+	if (index < 0 || index > 99)
+	{
+		std::cout << "Invalid index" << std::endl;
+	}
+	this->ideas[index] = idea;
 }

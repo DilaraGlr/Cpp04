@@ -13,6 +13,7 @@ Animal::Animal(const std::string &name): type(name)
 Animal::Animal(const Animal &other) : type(other.type)
 {
     std::cout << "Animal " << type << " has been copied" << std::endl;
+    *this = other;
 }
 
 Animal::~Animal()
@@ -22,10 +23,9 @@ Animal::~Animal()
 
 Animal &Animal::operator=(const Animal &other)
 {
-    if (this != &other)
-    {
-        type = other.type;
-    }
+    if (this == &other)
+		return (*this);
+    this->type = other.getType();
     std::cout << "Animal assignment operator called for " << type << std::endl;
     return *this;
 }
@@ -37,5 +37,5 @@ void Animal::makeSound() const
 
 std::string Animal::getType() const
 {
-    return type;
+    return this->type;
 }

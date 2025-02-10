@@ -13,6 +13,7 @@ WrongAnimal::WrongAnimal(const std::string &name) : type(name)
 WrongAnimal::WrongAnimal(const WrongAnimal &other) : type(other.type)
 {
     std::cout << "WrongAnimal " << type << " has been created" << std::endl;
+    *this = other;
 }
 
 WrongAnimal::~WrongAnimal()
@@ -20,14 +21,13 @@ WrongAnimal::~WrongAnimal()
     std::cout << "WrongAnimal " << type << " has been destroyed" << std::endl;
 }
 
-WrongAnimal &WrongAnimal::operator=(const WrongAnimal &other)
+WrongAnimal &WrongAnimal::operator=(WrongAnimal const &rhs)
 {
-    if (this != &other)
-    {
-        type = other.type;
-    }
-    std::cout << "WrongAnimal assignment operator called for " << type << std::endl;
-    return *this;
+	if (this == &rhs)
+		return (*this);
+	std::cout << "WrongAnimal assignation operator called" << std::endl;
+	this->type = rhs.getType();
+	return (*this);
 }
 
 void WrongAnimal::makeSound() const

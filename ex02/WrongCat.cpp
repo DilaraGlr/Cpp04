@@ -5,19 +5,18 @@ WrongCat::WrongCat() : WrongAnimal("WrongCat")
     std::cout << "WrongCat " << type << " has been created" << std::endl;
 }
 
-WrongCat::WrongCat(const WrongCat &other) : WrongAnimal(other)
+WrongCat::WrongCat(WrongCat const &src) : WrongAnimal(src)
 {
-    std::cout << "WrongCat " << type << " has been created" << std::endl;
+	std::cout << "WrongCat copy constructor called" << std::endl;
+	*this = src;
 }
-
-WrongCat &WrongCat::operator=(const WrongCat &other)
+WrongCat &WrongCat::operator=(WrongCat const &rhs)
 {
-    if (this != &other)
-    {
-        type = other.type;
-    }
-    std::cout << "WrongCat assignment operator called for " << type << std::endl;
-    return *this;
+	if (this == &rhs)
+		return (*this);
+	std::cout << "WrongCat assignation operator called" << std::endl;
+	this->type = rhs.getType();
+	return (*this);
 }
 
 WrongCat::~WrongCat()

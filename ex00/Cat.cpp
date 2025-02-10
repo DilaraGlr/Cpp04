@@ -8,16 +8,17 @@ Cat::Cat() : Animal("Cat")
 Cat::Cat(const Cat &other) : Animal(other)
 {
     std::cout << "Cat " << type << " has been created" << std::endl;
+   	*this = other;
+
 }
 
-Cat &Cat::operator=(const Cat &other)
+Cat &Cat::operator=(Cat const &rhs)
 {
-    if (this != &other)
-    {
-        type = other.type;
-    }
-    std::cout << "Cat assignment operator called for " << type << std::endl;
-    return *this;
+	if (this == &rhs)
+		return (*this);
+	std::cout << "Cat assignation operator called" << std::endl;
+	this->type = rhs.getType();
+	return (*this);
 }
 
 Cat::~Cat()
