@@ -1,23 +1,53 @@
-NAME = Animal
 
-CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+NAME 			= Animal
 
-SRCS = main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
+CC				= c++
+CFLAGS 			= -Wall -Wextra -Werror -std=c++98
+RM				= rm -rf
 
-OBJS = $(SRCS:.cpp=.o)
+OBJ_PATH		= objects
+
+HEADERS			= $(addsuffix .hpp, \
+					Animal \
+					Cat \
+					Dog \
+					WrongAnimal \
+					WrongCat \
+					)
+
+SRCS 			= $(addsuffix .cpp, \
+					main \
+					Animal \
+					Cat \
+					Dog \
+					WrongAnimal \
+					WrongCat \
+					)
+
+OBJS			=	$(SRCS:%.cpp=$(OBJ_PATH)/%.o)
+
+DEPS			=	$(OBJS:.o=.d)
+
+#--------------------RULES---------------------
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
+$(NAME): $(OBJS) $(HEADERS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+
+
+$(OBJ_PATH)/%.o: %.cpp $(HEADERS)
+			mkdir -p $(dir $@)
+			$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
+	$(RM) $(OBJ_PATH)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
+
+-include $(DEPS)
 
 .PHONY: all clean fclean re

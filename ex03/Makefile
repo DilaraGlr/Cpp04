@@ -1,82 +1,56 @@
-#--------------------Colors---------------------
 
-PINK            = \033[0;35m
-LIGHT_PINK      = \033[0;38;5;213m
-LIGHT_PURPLE    = \033[0;35m
-SOFT_CYAN       = \033[0;96m
-WHITE           = \033[1;37m
-NC              = \033[0m
-LIGHT_LAVENDER  = \033[0;150m  # Lavande pâle
-MAUVE           = \033[38;5;105m
+NAME 			= Materia
 
-#--------------------Program--------------------
+CC				= c++
+CFLAGS 			= -Wall -Wextra -Werror -std=c++98
+RM				= rm -rf
 
-NAME            = Brain
+OBJ_PATH		= objects
 
-#--------------------Compilation----------------
-
-CC              = c++
-CFLAGS          = -Wall -Wextra -Werror -std=c++98
-RM              = rm -rf
-
-#--------------------PATHS----------------------
-
-OBJ_PATH        = objects
-
-#--------------------Sources--------------------
-
-HEADERS         = $(addsuffix .hpp, \
-                    AMateria \
-                    ICharacter \
-                    Cure \
-                    Ice \
-                    IMateriaSource \
-                    MateriaSource \
-                    Character \
+HEADERS			= $(addsuffix .hpp, \
+					AMateria\
+                    Character\
+                    Cure\
+                    Ice\
+                    ICharacter\
+                    IMateriaSource\
+                    MateriaSource\
                     Materia \
-                    )
+					)
 
-SRCS            = $(addsuffix .cpp, \
-                    main \
+SRCS 			= $(addsuffix .cpp, \
+					main \
+					Character \
                     Cure \
                     Ice \
                     Materia \
-                    Character \
                     MateriaSource \
-                    )
+					)
 
-OBJS            = $(SRCS:%.cpp=$(OBJ_PATH)/%.o)
+OBJS			=	$(SRCS:%.cpp=$(OBJ_PATH)/%.o)
 
-DEPS            = $(OBJS:.o=.d)
+DEPS			=	$(OBJS:.o=.d)
 
 #--------------------RULES---------------------
 
 all: $(NAME)
 
 $(NAME): $(OBJS) $(HEADERS)
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-	@echo "${LIGHT_PINK}$@ ${MAUVE}Compiled successfully${NC}"
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+
 
 $(OBJ_PATH)/%.o: %.cpp $(HEADERS)
-			@mkdir -p $(dir $@)
-			@$(CC) $(CFLAGS) -c $< -o $@
+			mkdir -p $(dir $@)
+			$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@$(RM) $(OBJ_PATH)
-	@echo "${LIGHT_PURPLE}Finished cleaning${NC}"
+	$(RM) $(OBJ_PATH)
 
 fclean: clean
-	@$(RM) $(NAME)
-	@echo "${LIGHT_PURPLE}Complete cleaning completed${NC}"
+	$(RM) $(NAME)
 
 re: fclean all
 
 -include $(DEPS)
-
-run: $(NAME)
-	@./$(NAME) file bonjour ciao
-
-valgrind: $(NAME)
-	@valgrind --leak-check=full ./$(NAME)
 
 .PHONY: all clean fclean re

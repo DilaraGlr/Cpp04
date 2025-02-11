@@ -17,8 +17,8 @@ class Brain
 
 	void setIdeas(const std::string *ideas);
 	void setIdea(int index, std::string idea);
-const std::string *getIdeas(void);
-	const std::string getIdea(int i) const;};
-
+    const std::string *getIdeas(void);
+	const std::string getIdea(int i) const;
+};
 
 #endif
